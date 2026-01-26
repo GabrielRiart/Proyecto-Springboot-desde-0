@@ -21,10 +21,15 @@ public class servicioProducto implements servicioProductointerface{
     @Override
     public String guardado(Producto produ){
             produRepo.save(produ);
-            return "Producto guardado exitosamente";
+            return "Ya se guardo crack";
     }
     @Override
     public List<Producto> listartodos(){
         return produRepo.findAll();
     }
+    @Override
+    public Producto encontrar(int id){
+        return produRepo.findItem(id);
+    }
+
 }

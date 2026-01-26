@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Repository
 public class ProductoRepo {
@@ -66,11 +67,26 @@ public class ProductoRepo {
                 return dto;
             }
         };
-
-
         List<DtoBusquedaCategoria> productos = template.query(sql,rowMapper,categoria);
         return productos;
+    }
 
+    public Producto findItem(int id){
+        String sql= "SELECT * FROM producto AS p\n"  +
+                " WHERE id= ? \n" ;
+        RowMapper<Producto> rowMapper=new RowMapper<Producto>() {
+            @Override
+            public Producto mapRow(java.sql.ResultSet rs, int rowNum) throws java.sql.SQLException {
+                Producto produ=new Producto();
+                produ.setId(rs.getInt("id"));
+                produ.setNombre(rs.getString("nombre"));
+                produ.setPrecio(rs.getInt("precio"));
+                produ.setStock(rs.getInt("stock"));
+                produ.setCategory_id(rs.getInt("category_id"));
+                return produ;
+             }
 
+         };
+        return template.queryForObject(sql,rowMapper,id);
     }
 }

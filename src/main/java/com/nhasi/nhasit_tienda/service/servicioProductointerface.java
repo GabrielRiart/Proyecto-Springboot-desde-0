@@ -8,5 +8,6 @@ public interface servicioProductointerface {
     public String guardado(Producto produ);
     public List<Producto> listartodos();
     public List<DtoBusquedaCategoria> listarcate(String cate);
+    public Producto encontrar(int id);
 
 }
