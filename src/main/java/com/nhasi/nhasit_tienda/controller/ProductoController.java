@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
-import com.nhasi.nhasit_tienda.service.servicioProductointerface;
+import com.nhasi.nhasit_tienda.service.ServicioProductoInterface;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
@@ -17,10 +17,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/tienda")
 public class ProductoController {
-    private final servicioProductointerface produ;
+    private final ServicioProductoInterface produ;
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    public ProductoController(servicioProductointerface produ) {
+    public ProductoController(ServicioProductoInterface produ) {
         this.produ = produ;
     }
 
@@ -49,10 +49,7 @@ public class ProductoController {
     public List<Producto> all(){
         return produ.listartodos();
     }
-    @GetMapping("/Busquedafil/{categoria}")
-    public List<DtoBusquedaCategoria> search(@PathVariable String categoria){
-        return produ.listarcate(categoria);
-    }
+
     @GetMapping("/BusquedaId/{id}")
     public Producto searchIdcrack(@PathVariable int id){
         return produ.encontrar(id);

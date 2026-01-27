@@ -2,6 +2,7 @@ package com.nhasi.nhasit_tienda.service;
 
 import com.nhasi.nhasit_tienda.model.DtoBusquedaCategoria;
 import com.nhasi.nhasit_tienda.model.Producto;
+import com.nhasi.nhasit_tienda.repo.CategoriaRepo;
 import com.nhasi.nhasit_tienda.repo.ProductoRepo;
 
 import org.springframework.stereotype.Service;
@@ -9,15 +10,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class servicioProducto implements servicioProductointerface{
+public class ServicioProducto implements ServicioProductoInterface {
     private ProductoRepo produRepo;
-    public servicioProducto(ProductoRepo produRepo){
+    public ServicioProducto(ProductoRepo produRepo){
         this.produRepo=produRepo;
     }
-    @Override
-    public List<DtoBusquedaCategoria>listarcate(String category){
-        return produRepo.findCategory(category);
-    }
+
     @Override
     public String guardado(Producto produ){
             produRepo.save(produ);

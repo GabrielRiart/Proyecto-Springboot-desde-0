@@ -53,23 +53,7 @@ public class ProductoRepo {
         List<Producto> productos = template.query(sql,new BeanPropertyRowMapper<>(Producto.class));
         return productos;
     }
-    public List<DtoBusquedaCategoria> findCategory(String categoria){
-        String sql= "SELECT p.nombre, p.precio, c.category_name FROM producto AS p\n" +
-                "INNER JOIN category AS c\n" +
-                "ON p.category_id=c.category_id WHERE category_name=? \n" ;
-        RowMapper<DtoBusquedaCategoria> rowMapper =new RowMapper<DtoBusquedaCategoria>() {
-            @Override
-            public DtoBusquedaCategoria mapRow(ResultSet rs, int rowNum) throws SQLException {
-                DtoBusquedaCategoria dto= new DtoBusquedaCategoria();
-                dto.setNombreProducto(rs.getString("nombre"));
-                dto.setPrecioProducto(rs.getInt("precio"));
-                dto.setNombreCategoria(rs.getString("category_name"));
-                return dto;
-            }
-        };
-        List<DtoBusquedaCategoria> productos = template.query(sql,rowMapper,categoria);
-        return productos;
-    }
+
 
     public Producto findItem(int id){
         String sql= "SELECT * FROM producto AS p\n"  +

@@ -4,10 +4,10 @@ import com.nhasi.nhasit_tienda.model.DtoBusquedaCategoria;
 import com.nhasi.nhasit_tienda.model.Producto;
 import java.util.List;
 
-public interface servicioProductointerface {
+public interface ServicioProductoInterface {
     public String guardado(Producto produ);
     public List<Producto> listartodos();
-    public List<DtoBusquedaCategoria> listarcate(String cate);
+
     public Producto encontrar(int id);
 
 }
