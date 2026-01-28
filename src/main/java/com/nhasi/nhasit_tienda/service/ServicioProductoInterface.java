@@ -7,7 +7,9 @@ import java.util.List;
 public interface ServicioProductoInterface {
     public String guardado(Producto produ);
     public List<Producto> listartodos();
-
+    public List<Producto>Pormayorstock();
     public Producto encontrar(int id);
-
+    public Producto encontrarpornombre(String nombre);
+    public void actualizar(String name, Producto produ);
+    public void eliminar(int id);
 }

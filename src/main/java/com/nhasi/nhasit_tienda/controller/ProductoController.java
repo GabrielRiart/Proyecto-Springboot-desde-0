@@ -1,6 +1,6 @@
 package com.nhasi.nhasit_tienda.controller;
 
-import com.nhasi.nhasit_tienda.model.DtoBusquedaCategoria;
+
 import com.nhasi.nhasit_tienda.model.Producto;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 import com.nhasi.nhasit_tienda.service.ServicioProductoInterface;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 import java.util.List;
 
@@ -53,5 +54,30 @@ public class ProductoController {
     @GetMapping("/BusquedaId/{id}")
     public Producto searchIdcrack(@PathVariable int id){
         return produ.encontrar(id);
+    }
+    @GetMapping("/BusquedaNombre/{nombre}")
+    public Producto searchnamebro(@PathVariable String nombre){
+        return produ.encontrarpornombre(nombre);
+    }
+
+    @GetMapping("/MayorStonks")
+    public List<Producto> MayorStock(){
+        return produ.Pormayorstock();
+    }
+    @PutMapping("/actualizar")
+    public ResponseEntity<String> updateProducto(@RequestParam String name,@RequestBody Producto produx){
+        try{
+            produ.actualizar(name,produx);
+            return ResponseEntity.ok("Se actualizo el producto  ");
+
+        }catch (Exception error){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error" + error.getMessage());
+        }
+    }
+    @DeleteMapping("/deletear/{ID}")
+    public void deletear(@PathVariable int ID){
+
+        produ.eliminar(ID);
+
     }
 }

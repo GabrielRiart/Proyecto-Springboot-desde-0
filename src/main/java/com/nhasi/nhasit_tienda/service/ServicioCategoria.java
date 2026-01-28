@@ -22,5 +22,7 @@ public class ServicioCategoria implements ServicioCategoriaInterface{
     public void agregar(Category catego){
          categ.insertar(catego);
     }
+    @Override
+    public void actualizar(int id,Category category){categ.updataCat(id,category);}
 
 }

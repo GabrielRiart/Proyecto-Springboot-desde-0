@@ -9,4 +9,5 @@ public interface ServicioCategoriaInterface {
     public List<DtoBusquedaCategoria> listarcate(String cate);
     public List<Category>todascategorias();
     public void agregar(Category categoria);
+    public void actualizar(int id,Category category);
 }

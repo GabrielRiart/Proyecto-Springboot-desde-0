@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -62,5 +61,9 @@ public class CategoriaRepo {
         String sql= "INSERT INTO category (category_name) values (?)";
         template.update(sql,Categoria.getCategory_name());
 
+    }
+    public void updataCat(int id,Category category){
+        String sql= "UPDATE category SET category_name=? WHERE category_id=?";
+        template.update(sql,category.getCategory_name(),id);
     }
 }
