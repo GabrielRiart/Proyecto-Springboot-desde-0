@@ -8,21 +8,23 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class ServicioCategoria implements ServicioCategoriaInterface{
-    private final CategoriaRepo categ;
-    public ServicioCategoria(CategoriaRepo Catego){this.categ=Catego;}
+    private final CategoriaRepo categrepo;
+    public ServicioCategoria(CategoriaRepo Catego){this.categrepo =Catego;}
     @Override
     public List<DtoBusquedaCategoria>listarcate(String category){
-        return categ.findCategory(category);
+        return categrepo.findCategory(category);
     }
     @Override
     public List<Category>todascategorias(){
-        return categ.findCategorys();
+        return categrepo.findCategorys();
     }
     @Override
     public void agregar(Category catego){
-         categ.insertar(catego);
+         categrepo.insertar(catego);
     }
     @Override
-    public void actualizar(int id,Category category){categ.updataCat(id,category);}
-
+    public void actualizar(int id,Category category){
+        categrepo.updataCat(id,category);}
+    @Override
+    public void deletear(int id){categrepo.eliminar(id);}
 }

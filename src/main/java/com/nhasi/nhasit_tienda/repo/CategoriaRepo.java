@@ -2,6 +2,8 @@ package com.nhasi.nhasit_tienda.repo;
 
 import com.nhasi.nhasit_tienda.model.Category;
 import com.nhasi.nhasit_tienda.model.DtoBusquedaCategoria;
+import com.nhasi.nhasit_tienda.model.Producto;
+import com.nhasi.nhasit_tienda.util.FuncionesGeneralesInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,10 +12,13 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.List;
 @Repository
 public class CategoriaRepo {
     private JdbcTemplate template;
+    @Autowired
+    private FuncionesGeneralesInterface funcional;
     public JdbcTemplate getTemplate() {
         return template;
     }
@@ -52,10 +57,11 @@ public class CategoriaRepo {
 
          };
         List<Category> categorias = template.query(sql,rowMapper);
+        List<Category> categoriasf = funcional.ordenar(categorias, Comparator.comparing(Category::getCategory_id));
 
 
-        /*List<Category> categorias = template.query(sql,new BeanPropertyRowMapper<>(Category.class));*/
-        return categorias;
+            /*List<Category> categorias = template.query(sql,new BeanPropertyRowMapper<>(Category.class));*/
+        return categoriasf;
     }
     public void insertar(Category Categoria){
         String sql= "INSERT INTO category (category_name) values (?)";
@@ -66,4 +72,9 @@ public class CategoriaRepo {
         String sql= "UPDATE category SET category_name=? WHERE category_id=?";
         template.update(sql,category.getCategory_name(),id);
     }
+    public void eliminar(int idx){
+        String sql= "DELETE FROM category WHERE category_id =?";
+        template.update(sql,idx);
+    }
+
 }

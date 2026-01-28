@@ -41,6 +41,12 @@ public class CategoryController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error id no valido"+ e);
         }
     }
+    @DeleteMapping("/eliminar/{id}")
+    public void deletear(@PathVariable int id){
+        categor.deletear(id);
+    }
+   /* @GetMapping("/categorias/productos")
+    public List<>*/
 }
 
 

@@ -5,6 +5,7 @@ public class DtoBusquedaCategoria {
     private int precioProducto;
     private String NombreCategoria;
 
+
     public String getNombreProducto() {
         return NombreProducto;
     }
