@@ -1,13 +1,19 @@
 package com.nhasi.nhasit_tienda.model;
 
-import org.springframework.stereotype.Component;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
-@Component
 public class Producto {
+    @Positive(message = "Debe ingresar un id")
     private int id;
+    @NotBlank(message = "corno")
     private String nombre;
+    @NotNull
     private int precio ;
-    private int Stock;
+    @NotNull
+    int Stock;
+    @NotNull
     private int category_id;
 
     public int getCategory_id() {

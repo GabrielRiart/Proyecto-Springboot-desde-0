@@ -3,6 +3,7 @@ package com.nhasi.nhasit_tienda.service;
 import com.nhasi.nhasit_tienda.model.Producto;
 import com.nhasi.nhasit_tienda.repo.ProductoRepo;
 
+import com.nhasi.nhasit_tienda.service.IService.ServicioProductoInterface;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

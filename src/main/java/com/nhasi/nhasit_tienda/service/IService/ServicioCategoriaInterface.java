@@ -1,7 +1,7 @@
-package com.nhasi.nhasit_tienda.service;
+package com.nhasi.nhasit_tienda.service.IService;
 
 import com.nhasi.nhasit_tienda.model.Category;
-import com.nhasi.nhasit_tienda.model.DtoBusquedaCategoria;
+import com.nhasi.nhasit_tienda.model.DTO.DtoBusquedaCategoria;
 
 import java.util.List;
 

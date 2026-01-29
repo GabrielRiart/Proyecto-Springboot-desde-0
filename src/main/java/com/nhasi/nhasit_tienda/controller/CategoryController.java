@@ -1,8 +1,8 @@
 package com.nhasi.nhasit_tienda.controller;
 
 import com.nhasi.nhasit_tienda.model.Category;
-import com.nhasi.nhasit_tienda.model.DtoBusquedaCategoria;
-import com.nhasi.nhasit_tienda.service.ServicioCategoriaInterface;
+import com.nhasi.nhasit_tienda.model.DTO.DtoBusquedaCategoria;
+import com.nhasi.nhasit_tienda.service.IService.ServicioCategoriaInterface;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

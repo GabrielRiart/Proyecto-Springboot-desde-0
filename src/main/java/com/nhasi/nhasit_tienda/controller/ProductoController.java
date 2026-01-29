@@ -3,12 +3,13 @@ package com.nhasi.nhasit_tienda.controller;
 
 import com.nhasi.nhasit_tienda.model.Producto;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
-import com.nhasi.nhasit_tienda.service.ServicioProductoInterface;
+import com.nhasi.nhasit_tienda.service.IService.ServicioProductoInterface;
 
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -43,7 +44,7 @@ public class ProductoController {
         }
     }
     @PostMapping("/save")
-    public ResponseEntity<String> save(@RequestBody Producto produx){
+    public ResponseEntity<String> save(@Valid @RequestBody Producto produx){
         return ResponseEntity.status(HttpStatus.CREATED).body(produ.guardado(produx));
     }
     @GetMapping("/All")
@@ -75,7 +76,7 @@ public class ProductoController {
         }
     }
     @DeleteMapping("/deletear/{ID}")
-    public void deletear(@PathVariable int ID){
+    public void deletear(@Valid @PathVariable int ID){
 
         produ.eliminar(ID);
 

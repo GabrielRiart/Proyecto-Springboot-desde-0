@@ -1,4 +1,4 @@
-package com.nhasi.nhasit_tienda.model;
+package com.nhasi.nhasit_tienda.model.DTO;
 
 public class DtoBusquedaCategoria {
     private String NombreProducto;

@@ -1,9 +1,10 @@
 package com.nhasi.nhasit_tienda.repo;
 
 import com.nhasi.nhasit_tienda.model.Producto;
+import com.nhasi.nhasit_tienda.repo.Irepository.IProductoRepo;
+import com.nhasi.nhasit_tienda.rowmapper.ProductorMapper;
 import com.nhasi.nhasit_tienda.util.FuncionesGenerales;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
@@ -13,7 +14,8 @@ import java.util.List;
 import org.springframework.jdbc.core.RowMapper;
 
 @Repository
-public class ProductoRepo {
+public class ProductoRepo implements IProductoRepo {
+    private final ProductorMapper rowProduc = new ProductorMapper();
     private JdbcTemplate template;
     @Autowired
     private FuncionesGenerales<Producto> funcionesGenerales;
@@ -26,11 +28,12 @@ public class ProductoRepo {
         this.template = template;
     }
 
-    
+    @Override
     public void  save(Producto produ) {
         String sql="insert into producto (id,nombre,precio,stock,category_id) values (?,?,?,?,?)";
         template.update(sql,produ.getId(),produ.getNombre(),produ.getPrecio(),produ.getStock(),produ.getCategory_id());
     }
+    @Override
     public List<Producto> findAll(){
        String sql="select * from producto";
         /* RowMapper<Producto> rowMapper=new RowMapper<Producto>() {
@@ -46,48 +49,25 @@ public class ProductoRepo {
         };
         List<Producto> productos = template.query(sql, rowMapper);
         */
-        List<Producto> productos = template.query(sql,new BeanPropertyRowMapper<>(Producto.class));
+
+        /*List<Producto> productos = template.query(sql,new BeanPropertyRowMapper<>(Producto.class));*/
+        List<Producto> productos = template.query(sql,rowProduc);
         return productos;
     }
 
-
+    @Override
     public Producto findItem(int id){
         String sql= "SELECT * FROM producto AS p\n"  +
                 " WHERE id= ? \n" ;
-        RowMapper<Producto> rowMapper=new RowMapper<Producto>() {
-            @Override
-            public Producto mapRow(java.sql.ResultSet rs, int rowNum) throws java.sql.SQLException {
-                Producto produ=new Producto();
-                produ.setId(rs.getInt("id"));
-                produ.setNombre(rs.getString("nombre"));
-                produ.setPrecio(rs.getInt("precio"));
-                produ.setStock(rs.getInt("stock"));
-                produ.setCategory_id(rs.getInt("category_id"));
-                return produ;
-             }
-
-         };
-        return template.queryForObject(sql,rowMapper,id);
+        return template.queryForObject(sql,rowProduc,id);
     }
+    @Override
     public Producto findObject(String name){
         String sql= "SELECT * FROM producto AS p\n"  +
                 " WHERE nombre= ? \n" ;
-        RowMapper<Producto> rowMapper=new RowMapper<Producto>() {
-            @Override
-            public Producto mapRow(java.sql.ResultSet rs, int rowNum) throws java.sql.SQLException {
-                Producto produ=new Producto();
-                produ.setId(rs.getInt("id"));
-                produ.setNombre(rs.getString("nombre"));
-                produ.setPrecio(rs.getInt("precio"));
-                produ.setStock(rs.getInt("stock"));
-                produ.setCategory_id(rs.getInt("category_id"));
-                return produ;
-            }
-
-        };
-        return template.queryForObject(sql,rowMapper,name);
+        return template.queryForObject(sql,rowProduc,name);
     }
-
+    @Override
     public void updatedataP(String noHOmbre, Producto produ){
         String sql= "UPDATE public.producto\n" +
                 "\tSET  precio=?, stock=?, category_id=?\n" +
@@ -95,6 +75,7 @@ public class ProductoRepo {
 
         template.update(sql,produ.getPrecio(),produ.getStock(),produ.getCategory_id(),noHOmbre);
     }
+    @Override
     public List<Producto>findStock(){
         String sql ="Select p.nombre, p.precio,p.stock from producto AS p";
         RowMapper<Producto> rowMapper= new RowMapper<Producto>() {
@@ -111,6 +92,7 @@ public class ProductoRepo {
         List<Producto> finalstock= funcionesGenerales.ordenar(stonks,Comparator.comparing(Producto::getStock).reversed());
         return finalstock;
     }
+    @Override
     public void delete(int idx){
         String sql="DELETE FROM producto WHERE id=?";
         template.update(sql,idx);
