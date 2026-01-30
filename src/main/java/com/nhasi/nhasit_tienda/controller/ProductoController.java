@@ -4,13 +4,13 @@ package com.nhasi.nhasit_tienda.controller;
 import com.nhasi.nhasit_tienda.model.Producto;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 import com.nhasi.nhasit_tienda.service.IService.ServicioProductoInterface;
-
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -57,7 +57,7 @@ public class ProductoController {
         return produ.encontrar(id);
     }
     @GetMapping("/BusquedaNombre/{nombre}")
-    public Producto searchnamebro(@PathVariable String nombre){
+    public Producto searchnamebro(@PathVariable @NotBlank String nombre){
         return produ.encontrarpornombre(nombre);
     }
 

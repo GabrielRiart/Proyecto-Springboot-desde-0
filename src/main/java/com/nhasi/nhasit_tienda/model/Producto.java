@@ -1,69 +1,30 @@
 package com.nhasi.nhasit_tienda.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
 public class Producto {
+
     @Positive(message = "Debe ingresar un id")
+    @JsonIgnore
     private int id;
-    @NotBlank(message = "corno")
+    @NotBlank(message = "No texto vacio")
+    @JsonProperty("nombre")
     private String nombre;
     @NotNull
+    @JsonProperty("precio")
     private int precio ;
     @NotNull
+    @JsonProperty("stock")
     int Stock;
     @NotNull
+    @JsonProperty("categoria_id")
     private int category_id;
-
-    public int getCategory_id() {
-        return category_id;
-    }
-
-    public void setCategory_id(int category_id) {
-        this.category_id = category_id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(int precio) {
-        this.precio = precio;
-    }
-
-    public int getStock() {
-        return Stock;
-    }
-
-    public void setStock(int stock) {
-        Stock = stock;
-    }
-
-    @Override
-    public String toString() {
-        return "Producto{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", precio=" + precio +
-                ", Stock=" + Stock +
-                ", category_id=" + category_id +
-                '}';
-    }
 }

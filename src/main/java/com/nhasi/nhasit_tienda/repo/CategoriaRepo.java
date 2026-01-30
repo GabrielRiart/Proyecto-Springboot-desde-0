@@ -6,6 +6,8 @@ import com.nhasi.nhasit_tienda.repo.Irepository.ICategoriaRepo;
 import com.nhasi.nhasit_tienda.rowmapper.CategoryMapper;
 import com.nhasi.nhasit_tienda.rowmapper.DtoCategoryMapper;
 import com.nhasi.nhasit_tienda.util.FuncionesGeneralesInterface;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -31,7 +33,8 @@ public class CategoriaRepo implements ICategoriaRepo {
     }
 
     @Override
-    public List<DtoBusquedaCategoria> findCategory(String categoria){
+    public List<DtoBusquedaCategoria> findCategory(@Valid @NotBlank String categoria){
+
         String sql= "SELECT p.nombre, p.precio, c.category_name FROM producto AS p\n" +
                 "INNER JOIN Category AS c\n" +
                 "ON p.category_id=c.category_id WHERE category_name=? \n" ;
