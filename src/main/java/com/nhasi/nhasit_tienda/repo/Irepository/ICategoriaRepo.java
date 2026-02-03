@@ -10,6 +10,6 @@ public interface ICategoriaRepo {
     public List<Category>findCategorys();
     public void insertar(Category Categoria);
     public void updataCat(int id,Category category);
-    public void eliminar(int idx);
+    public void deletearCat(int idx);
 
     }

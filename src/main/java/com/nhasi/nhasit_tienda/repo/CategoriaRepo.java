@@ -10,11 +10,8 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.List;
 @Repository
@@ -45,7 +42,7 @@ public class CategoriaRepo implements ICategoriaRepo {
     public List<Category>findCategorys(){
         String sql ="Select * from category";
         List<Category> categorias = template.query(sql,rowCategory);
-        List<Category> categoriasf = funcional.ordenar(categorias, Comparator.comparing(Category::getCategory_id));
+        List<Category> categoriasf = funcional.ordenar(categorias, Comparator.comparing(Category::getCategory_Id));
 
 
             /*List<Category> categorias = template.query(sql,new BeanPropertyRowMapper<>(Category.class));*/
@@ -54,16 +51,16 @@ public class CategoriaRepo implements ICategoriaRepo {
     @Override
     public void insertar(Category Categoria){
         String sql= "INSERT INTO category (category_name) values (?)";
-        template.update(sql,Categoria.getCategory_name());
+        template.update(sql,Categoria.getCategory_Name());
 
     }
     @Override
     public void updataCat(int id,Category category){
         String sql= "UPDATE category SET category_name=? WHERE category_id=?";
-        template.update(sql,category.getCategory_name(),id);
+        template.update(sql,category.getCategory_Name(),id);
     }
     @Override
-    public void eliminar(int idx){
+    public void deletearCat(int idx){
         String sql= "DELETE FROM category WHERE category_id =?";
         template.update(sql,idx);
     }

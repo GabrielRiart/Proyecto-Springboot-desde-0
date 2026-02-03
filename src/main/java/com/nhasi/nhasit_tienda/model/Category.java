@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 public class Category {
     @NotNull
     @JsonProperty("categoria_id")
-    private int category_id;
+    private int category_Id;
     @NotBlank
     @JsonProperty("categoria_name")
-    private String category_name;
+    private String category_Name;
 
 }

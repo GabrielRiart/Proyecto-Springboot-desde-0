@@ -1,6 +1,7 @@
 package com.nhasi.nhasit_tienda.controller;
 
 
+import com.nhasi.nhasit_tienda.model.Filtros;
 import com.nhasi.nhasit_tienda.model.Producto;
 
 import jakarta.validation.Valid;
@@ -12,8 +13,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 import com.nhasi.nhasit_tienda.service.IService.ServicioProductoInterface;
 import org.springframework.web.bind.annotation.RequestBody;
-
-
 import java.util.List;
 
 @RestController
@@ -46,6 +45,8 @@ public class ProductoController {
     @PostMapping("/save")
     public ResponseEntity<String> save(@Valid @RequestBody Producto produx){
         return ResponseEntity.status(HttpStatus.CREATED).body(produ.guardado(produx));
+
+
     }
     @GetMapping("/All")
     public List<Producto> all(){
@@ -57,10 +58,13 @@ public class ProductoController {
         return produ.encontrar(id);
     }
     @GetMapping("/BusquedaNombre/{nombre}")
-    public Producto searchnamebro(@PathVariable @NotBlank String nombre){
+    public List<Producto> searchnamebro(@PathVariable @NotBlank String nombre){
         return produ.encontrarpornombre(nombre);
     }
-
+    @GetMapping("/filtros")
+    public List<Producto> searchfilters(@ModelAttribute Filtros filtrox){
+        return produ.filtroxs(filtrox);
+    }
     @GetMapping("/MayorStonks")
     public List<Producto> MayorStock(){
         return produ.Pormayorstock();

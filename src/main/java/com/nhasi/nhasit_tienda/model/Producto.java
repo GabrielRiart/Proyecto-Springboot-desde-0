@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,8 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Producto {
 
-    @Positive(message = "Debe ingresar un id")
-    @JsonIgnore
+    @PositiveOrZero(message = "Debe ingresar un id")
     private int id;
     @NotBlank(message = "No texto vacio")
     @JsonProperty("nombre")
@@ -26,5 +26,5 @@ public class Producto {
     int Stock;
     @NotNull
     @JsonProperty("categoria_id")
-    private int category_id;
+    private int category_Id;
 }

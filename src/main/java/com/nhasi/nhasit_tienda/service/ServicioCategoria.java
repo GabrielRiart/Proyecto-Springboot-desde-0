@@ -27,5 +27,5 @@ public class ServicioCategoria implements ServicioCategoriaInterface {
     public void actualizar(int id,Category category){
         categrepo.updataCat(id,category);}
     @Override
-    public void deletear(int id){categrepo.eliminar(id);}
+    public void deletear(int id){categrepo.deletearCat(id);}
 }

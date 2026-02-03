@@ -10,7 +10,7 @@ public class ProductorMapper implements RowMapper<Producto> {
         produ.setNombre(rs.getString("nombre"));
         produ.setPrecio(rs.getInt("precio"));
         produ.setStock(rs.getInt("stock"));
-        produ.setCategory_id(rs.getInt("category_id"));
+        produ.setCategory_Id(rs.getInt("category_id"));
         return produ;
     }
 }
