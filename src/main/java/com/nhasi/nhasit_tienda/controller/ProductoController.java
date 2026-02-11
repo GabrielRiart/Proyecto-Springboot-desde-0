@@ -61,8 +61,8 @@ public class ProductoController {
     public List<Producto> searchnamebro(@PathVariable @NotBlank String nombre){
         return produ.encontrarpornombre(nombre);
     }
-    @GetMapping("/filtros")
-    public List<Producto> searchfilters(@ModelAttribute Filtros filtrox){
+    @PostMapping("/filtros")
+    public List<Producto> searchfilters(@RequestBody Filtros filtrox){
         return produ.filtroxs(filtrox);
     }
     @GetMapping("/MayorStonks")

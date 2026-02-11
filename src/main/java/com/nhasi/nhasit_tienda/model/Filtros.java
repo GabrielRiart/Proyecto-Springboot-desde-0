@@ -1,6 +1,6 @@
 package com.nhasi.nhasit_tienda.model;
 
-import jakarta.validation.constraints.Positive;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +12,8 @@ public class Filtros {
     private int preciomin;
     @PositiveOrZero
     private int preciomax;
+    @Schema(example = "")
     private String nombre_producto;
+
     private int id_category;
 }
